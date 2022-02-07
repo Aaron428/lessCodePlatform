@@ -4,3 +4,13 @@
   width: 20%;
   background-color: #fff;
 }
+
+.page-name-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-name-wrapper label {
+  margin-right: 8px;
+}
