@@ -1,0 +1,28 @@
+.shared-input {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px 11px;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background-color: #fff;
+  background-image: none;
+  color: #000000d9;
+  list-style: none;
+  font-variant: tabular-nums;
+  font-size: 14px;
+  line-height: 1.5715;
+  transition: all .3s;
+
+  font-feature-settings: "tnum";
+}
+
+.page-name-wrapper input:focus {
+  outline: 0;
+  border-color: #096dd9;
+  border-right-width: 1px !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
+}
