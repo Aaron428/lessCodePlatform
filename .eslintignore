@@ -1,0 +1,6 @@
+/node_nodules
+/dist
+/src/**/*.scss.d.ts
+api.js
+*autoGenerate.d.ts
+*autoGenerate.ts
