@@ -1,0 +1,10 @@
+.editor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0 20px;
+  padding: 20px;
+  width: 55%;
+  background-color: #fff;
+}

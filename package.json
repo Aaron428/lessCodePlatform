@@ -6,9 +6,10 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint-staged": "lint-staged",
-    "lint": "eslint src --ext .ts,.tsx && stylelint \"./src/**/*.less\""
+    "lint": "eslint src --ext .ts,.tsx && stylelint \"./src/**/*.css\""
   },
   "dependencies": {
+    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
