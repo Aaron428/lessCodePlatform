@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint-staged": "lint-staged",
+    "lint": "eslint src --ext .ts,.tsx && stylelint \"./src/**/*.less\""
   },
   "dependencies": {
     "react": "^17.0.2",
@@ -17,6 +19,7 @@
     }
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
