@@ -5,11 +5,13 @@ import { INIT_IMAGE_CONFIG } from '@shared/constants'
 import './index.css'
 
 const Editotr = () => {
+  const [activeComp, setActiveComp] = useState<string | null>(null)
   const [comp, setComp] = useState<EditorType.IComp[]>([])
 
   const ctx = useContext(EditorContext)
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  // add component
+  const addComponentHandler = (e: React.DragEvent<HTMLDivElement>) => {
     setComp([
       ...comp,
       {
@@ -22,10 +24,49 @@ const Editotr = () => {
     ])
   }
 
+  const moveComponentHandler = (e: React.DragEvent<HTMLDivElement>, id: string | null) => {
+    if (id) {
+      const target = comp.find(d => d.id === id)
+      if (target) {
+        target.x = e.pageX - 320 - (ctx.shiftX || 0)
+        target.y = e.pageY - (ctx.shiftY || 0)
+        console.log(e)
+        setComp([...comp])
+      }
+    }
+  }
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    switch (ctx.operate) {
+      case 'ADD':
+        addComponentHandler(e)
+      case 'MOVE':
+        moveComponentHandler(e, activeComp)
+      default:
+        return
+    }
+  }
+
+  const activeCurrentComp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string) => {
+    if (ctx.setCtxObj) {
+      const targetDom = e.target as HTMLElement
+      const shiftX = e.clientX - targetDom.getBoundingClientRect().left
+      const shiftY = e.clientY - targetDom.getBoundingClientRect().top
+      ctx.setCtxObj({ operate: 'MOVE', operateType: 'image', id, shiftX, shiftY })
+    }
+    setActiveComp(id)
+  }
+
   return (
     <div className="editor" onDrop={handleDrop} onDragOver={e => e.preventDefault()}>
       {comp.map(d => (
-        <div className="component" key={d.id} style={dataToStyle(d)}></div>
+        <div
+          className={activeComp === d.id ? 'actived-component' : 'component'}
+          key={d.id}
+          style={dataToStyle(d)}
+          draggable
+          onMouseDown={e => activeCurrentComp(e, d.id)}
+        ></div>
       ))}
     </div>
   )

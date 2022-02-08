@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Editotr from '@container/Editor'
 import ComponentBar from '@container/ComponentBar'
 import AttributeArea from '@container/AttributeArea'
+import Input from '@shared/input'
 
 import { EditorContext, operateState } from '@store/index'
 import 'normalize.css'
@@ -13,10 +14,16 @@ const App = () => {
 
   return (
     <EditorContext.Provider value={{ ...ctxObj, setCtxObj }}>
-      <div className="editor-wrapper">
-        <ComponentBar />
-        <Editotr />
-        <AttributeArea />
+      <div className="page">
+        <div className="editor-menu">
+          <label htmlFor="name">页面名称</label>
+          <Input style={{ width: 240 }} id="name" />
+        </div>
+        <div className="editor-wrapper">
+          <ComponentBar />
+          <Editotr />
+          <AttributeArea />
+        </div>
       </div>
     </EditorContext.Provider>
   )
