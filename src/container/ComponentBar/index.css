@@ -1,0 +1,43 @@
+.component-bar {
+  box-sizing: border-box;
+  padding: 20px;
+  width: 300px;
+  background-color: #fff;
+}
+
+.page-name-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-name-wrapper label {
+  margin-right: 8px;
+}
+
+.component-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 44px;
+  width: 100%;
+}
+
+.component-wrapper .item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 12px;
+  width: 120px;
+  height: 66px;
+  background-color: aliceblue;
+  font-size: 14px;
+  cursor: move;
+
+  user-select: none;
+}
+
+.component-wrapper .item .icon {
+  margin-bottom: 6px;
+}

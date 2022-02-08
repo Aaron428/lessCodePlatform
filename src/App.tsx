@@ -1,16 +1,27 @@
-import Editotr from './Editor'
-import ComponentBar from './ComponentBar'
-import AttributeArea from './AttributeArea'
+import { createContext, useEffect, useState } from 'react'
+import Editotr from '@container/Editor'
+import ComponentBar from '@container/ComponentBar'
+import AttributeArea from '@container/AttributeArea'
+
+import { operateState } from '@store/index'
 import 'normalize.css'
 import './App.css'
 
+const EditorContext = createContext({})
+
 const App = () => {
+  const [ctxObj] = useState<StoreType.IOperateState>(operateState)
+
+  useEffect(() => {}, [])
+
   return (
-    <div className="editor-wrapper">
-      <ComponentBar />
-      <Editotr />
-      <AttributeArea />
-    </div>
+    <EditorContext.Provider value={ctxObj}>
+      <div className="editor-wrapper">
+        <ComponentBar />
+        <Editotr />
+        <AttributeArea />
+      </div>
+    </EditorContext.Provider>
   )
 }
 
