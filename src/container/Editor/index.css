@@ -7,9 +7,16 @@
   margin: 0 20px;
   padding: 20px;
   width: 55%;
+  border-radius: 4px;
   background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 5%);
 }
 
 .editor .component {
   border: 1px solid #ccc;
+}
+
+.editor .actived-component {
+  border: 1px solid deepskyblue;
+  cursor: move;
 }

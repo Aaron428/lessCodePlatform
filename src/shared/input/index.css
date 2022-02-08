@@ -20,9 +20,9 @@
   font-feature-settings: "tnum";
 }
 
-.page-name-wrapper input:focus {
+.editor-menu input:focus {
   outline: 0;
-  border-color: #096dd9;
+  border-color: #40a9ff;
   border-right-width: 1px !important;
   box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
 }
