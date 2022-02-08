@@ -6,8 +6,17 @@ import './index.css'
 
 const ComponentBar = () => {
   const ctx = useContext(EditorContext)
-  const onStart = (_: React.DragEvent<HTMLDivElement>, type: SharedType.IToolTypes) => {
-    changeCtxHandler(ctx, { operate: 'ADD', operateType: type })
+
+  /**
+   * add component
+   * @param _ drag event
+   * @param type component type
+   */
+  const onStart = (e: React.DragEvent<HTMLDivElement>, type: SharedType.IToolTypes) => {
+    const targetDom = e.target as HTMLElement
+    const shiftX = e.clientX - targetDom.getBoundingClientRect().left
+    const shiftY = e.clientY - targetDom.getBoundingClientRect().top
+    changeCtxHandler(ctx, { operate: 'ADD', operateType: type, shiftX, shiftY })
   }
 
   return (

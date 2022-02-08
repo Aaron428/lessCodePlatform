@@ -1,3 +1,5 @@
+import React from 'react'
+
 /**
  * 生成随机含 数字、字母 的字符串
  * @returns id: string
@@ -19,3 +21,12 @@ export const generateId = (): string => {
   }
   return id
 }
+
+export const dataToStyle = (data: EditorType.IComp): React.CSSProperties => ({
+  zIndex: data.layer,
+  position: 'absolute',
+  left: data.x,
+  top: data.y,
+  width: data.width,
+  height: data.height
+})

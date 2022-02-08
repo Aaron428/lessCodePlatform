@@ -1,4 +1,5 @@
 .editor {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,4 +8,8 @@
   padding: 20px;
   width: 55%;
   background-color: #fff;
+}
+
+.editor .component {
+  border: 1px solid #ccc;
 }
