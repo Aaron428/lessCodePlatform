@@ -18,7 +18,7 @@ const Editotr = () => {
         ...INIT_IMAGE_CONFIG,
         id: generateId(),
         x: e.pageX - 320 - (ctx.shiftX || 0),
-        y: e.pageY - (ctx.shiftY || 0),
+        y: e.pageY - 100 - (ctx.shiftY || 0),
         type: ctx.operateType
       }
     ])
@@ -29,8 +29,7 @@ const Editotr = () => {
       const target = comp.find(d => d.id === id)
       if (target) {
         target.x = e.pageX - 320 - (ctx.shiftX || 0)
-        target.y = e.pageY - (ctx.shiftY || 0)
-        console.log(e)
+        target.y = e.pageY - 100 - (ctx.shiftY || 0)
         setComp([...comp])
       }
     }
