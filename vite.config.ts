@@ -10,7 +10,8 @@ export default defineConfig({
     alias: {
       '@shared': resolve(__dirname, '/src/shared'),
       '@store': resolve(__dirname, '/src/store'),
-      '@container': resolve(__dirname, '/src/container')
+      '@container': resolve(__dirname, '/src/container'),
+      '@utils': resolve(__dirname, '/src/utils')
     }
   },
   server: {

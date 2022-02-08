@@ -18,6 +18,7 @@
     "baseUrl": "./src",
     "paths": {
       "@container/*": ["container/*"],
+      "@utils/*": ["utils/*"],
       "@shared/*": ["shared/*"],
       "@store/*": ["store/*"]
     }
