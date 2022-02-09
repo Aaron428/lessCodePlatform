@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { dataToStyle, generateId } from '@utils/index'
-import { directList, INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
+import { INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
 import { EditorContext } from '@store/index'
 import './index.css'
 import ActiveComponent from '@shared/activeComponent'
