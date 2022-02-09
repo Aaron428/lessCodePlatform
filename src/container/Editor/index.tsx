@@ -31,8 +31,18 @@ const Editotr = () => {
     if (id) {
       const target = comp.find(d => d.id === id)
       if (target) {
-        target.x = e.pageX - ctx.shiftX
-        target.y = e.pageY - ctx.shiftY
+        let x = e.pageX - ctx.shiftX
+        let y = e.pageY - ctx.shiftY
+        // 规定边界
+        if (x < 0) {
+          x = 0
+        }
+        if (y < 0) {
+          y = 0
+        }
+        target.x = x
+        target.y = y
+
         setComp([...comp])
       }
     }
@@ -54,8 +64,8 @@ const Editotr = () => {
   const activeCurrentComp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string) => {
     if (ctx.setCtxObj) {
       const targetDom = e.target as HTMLElement
-      const shiftX = e.clientX - targetDom.getBoundingClientRect().left + 320
-      const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 100
+      const shiftX = e.clientX - targetDom.getBoundingClientRect().left + 340
+      const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 104
       ctx.setCtxObj({ operate: 'MOVE', operateType: 'image', id, shiftX, shiftY })
     }
     setActiveComp(id)

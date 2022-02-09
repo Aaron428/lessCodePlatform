@@ -22,6 +22,7 @@ export const generateId = (): string => {
   return id
 }
 
+// 把数据转化成对应的样式
 export const dataToStyle = (data: EditorType.IComp): React.CSSProperties => ({
   zIndex: data.layer,
   position: 'absolute',
