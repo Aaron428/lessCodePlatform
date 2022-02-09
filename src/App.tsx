@@ -13,19 +13,21 @@ const App = () => {
   const [ctxObj, setCtxObj] = useState<StoreType.IOperateState>(operateState)
 
   return (
-    <EditorContext.Provider value={{ ...ctxObj, setCtxObj }}>
-      <div className="page">
-        <div className="editor-menu">
-          <label htmlFor="name">页面名称</label>
-          <Input style={{ width: 240 }} id="name" />
+    <div className="page">
+      <EditorContext.Provider value={{ ...ctxObj, setCtxObj }}>
+        <div className="app">
+          <div className="editor-menu">
+            <label htmlFor="name">页面名称</label>
+            <Input style={{ width: 240 }} id="name" />
+          </div>
+          <div className="editor-wrapper">
+            <ComponentBar />
+            <Editotr />
+            <AttributeArea />
+          </div>
         </div>
-        <div className="editor-wrapper">
-          <ComponentBar />
-          <Editotr />
-          <AttributeArea />
-        </div>
-      </div>
-    </EditorContext.Provider>
+      </EditorContext.Provider>
+    </div>
   )
 }
 
