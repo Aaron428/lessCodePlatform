@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className="page">
-      <EditorContext.Provider value={{ ...ctxObj, setCtxObj }}>
+      <EditorContext.Provider value={{ ...ctxObj, setCtxObj } as StoreType.IOperateState}>
         <div className="app">
           <div className="editor-menu">
             <label htmlFor="name">页面名称</label>

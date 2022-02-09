@@ -14,7 +14,13 @@ const ComponentBar = () => {
   const onStart = (e: React.DragEvent<HTMLDivElement>, type: SharedType.IToolTypes) => {
     const shiftX = e.clientX + OFFSET_TOOL_BAR
     const shiftY = e.clientY - OFFSET_TOP_BAR
-    changeCtxHandler(ctx, { operate: 'ADD', operateType: type, shiftX, shiftY, id: '' })
+    changeCtxHandler(ctx, {
+      operate: 'ADD',
+      operateType: type,
+      shiftX,
+      shiftY,
+      id: ''
+    })
   }
 
   return (

@@ -5,6 +5,7 @@ declare namespace StoreType {
     id: string
     shiftX: number
     shiftY: number
+    comps: EditorType.IComp[]
   }
 
   interface IOperateState extends IOperateStateObj {

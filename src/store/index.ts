@@ -6,7 +6,8 @@ export const operateState: StoreType.IOperateState = {
   operateType: undefined,
   shiftX: 0,
   shiftY: 0,
-  id: ''
+  id: '',
+  comps: []
 }
 
 // context
@@ -15,7 +16,7 @@ export const EditorContext = createContext(operateState)
 // 修改 ctx 的方法
 export const changeCtxHandler = (
   ctx: StoreType.IOperateState,
-  data: StoreType.IOperateStateObj
+  data: Partial<StoreType.IOperateStateObj>
 ) => {
   const { setCtxObj } = ctx
   if (setCtxObj) {

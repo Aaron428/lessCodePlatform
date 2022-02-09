@@ -1,20 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { dataToStyle, generateId } from '@utils/index'
 import { INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
-import { EditorContext } from '@store/index'
+import { changeCtxHandler, EditorContext } from '@store/index'
 import './index.css'
 import ActiveComponent from '@shared/activeComponent'
 
 // 编辑器模块（中间的那一块）
 // 负责组建的新增、移动等操作
 const Editotr = () => {
-  const [comp, setComp] = useState<EditorType.IComp[]>([])
-
   const ctx = useContext(EditorContext)
 
   // add component
   const addComponentHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    const newData = [...comp]
+    const { comps } = ctx
+    const newData = [...comps]
     newData.push({
       ...INIT_IMAGE_CONFIG,
       id: generateId(),
@@ -22,13 +21,13 @@ const Editotr = () => {
       y: e.pageY - ctx.shiftY,
       type: ctx.operateType
     })
-    setComp(newData)
+    changeCtxHandler(ctx, { comps: newData })
   }
 
   // move component
   const moveComponentHandler = (e: React.DragEvent<HTMLDivElement>) => {
     if (ctx.id) {
-      const target = comp.find(d => d.id === ctx.id)
+      const target = ctx.comps.find(d => d.id === ctx.id)
       if (target) {
         const componentBarDom = document.querySelector('.component-bar') as HTMLElement
         let x = e.pageX - ctx.shiftX + OFFSET_X - (componentBarDom?.offsetLeft || 0)
@@ -50,8 +49,7 @@ const Editotr = () => {
         }
         target.x = x
         target.y = y
-
-        setComp([...comp])
+        changeCtxHandler(ctx, { comps: [...ctx.comps] })
       }
     }
   }
@@ -70,19 +68,17 @@ const Editotr = () => {
 
   // 激活当前组件，记录鼠标当前偏移量，为移动时的便宜量计算做准备
   const activeCurrentComp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string) => {
-    if (ctx.setCtxObj) {
-      const targetDom = e.target as HTMLElement
-      const shiftX = e.clientX - targetDom.getBoundingClientRect().left + 340
-      const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 104
-      ctx.setCtxObj({ operate: 'MOVE', operateType: 'image', id, shiftX, shiftY })
-    }
+    const targetDom = e.target as HTMLElement
+    const shiftX = e.clientX - targetDom.getBoundingClientRect().left + 340
+    const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 104
+    changeCtxHandler(ctx, { id, shiftX, shiftY })
   }
 
   return (
     <div className="editor" onDrop={handleDrop} onDragOver={e => e.preventDefault()}>
-      {comp.map(d => (
+      {ctx.comps.map(d => (
         <div
-          draggable
+          // draggable
           key={d.id}
           style={dataToStyle(d)}
           onMouseDown={e => activeCurrentComp(e, d.id)}
