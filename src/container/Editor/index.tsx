@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { EditorContext } from '@store/index'
 import { dataToStyle, generateId } from '@utils/index'
 import { INIT_IMAGE_CONFIG } from '@shared/constants'
+import { EditorContext } from '@store/index'
 import './index.css'
 
+// 编辑器模块（中间的那一块）
+// 负责组建的新增、移动等操作
 const Editotr = () => {
   const [activeComp, setActiveComp] = useState<string | null>(null)
   const [comp, setComp] = useState<EditorType.IComp[]>([])
@@ -24,6 +26,7 @@ const Editotr = () => {
     ])
   }
 
+  // move component
   const moveComponentHandler = (e: React.DragEvent<HTMLDivElement>, id: string | null) => {
     if (id) {
       const target = comp.find(d => d.id === id)
@@ -35,6 +38,7 @@ const Editotr = () => {
     }
   }
 
+  // 针对不同的动作，对组建进行相应的处理
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     switch (ctx.operate) {
       case 'ADD':
@@ -46,6 +50,7 @@ const Editotr = () => {
     }
   }
 
+  // 激活当前组件，记录鼠标当前偏移量，为移动时的便宜量计算做准备
   const activeCurrentComp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string) => {
     if (ctx.setCtxObj) {
       const targetDom = e.target as HTMLElement

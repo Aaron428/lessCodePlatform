@@ -1,5 +1,6 @@
 import { createContext } from 'react'
 
+// state 默认值
 export const operateState: StoreType.IOperateState = {
   operate: undefined,
   operateType: undefined,
@@ -7,8 +8,10 @@ export const operateState: StoreType.IOperateState = {
   shiftY: 0
 }
 
+// context
 export const EditorContext = createContext(operateState)
 
+// 修改 ctx 的方法
 export const changeCtxHandler = (
   ctx: StoreType.IOperateState,
   data: StoreType.IOperateStateObj

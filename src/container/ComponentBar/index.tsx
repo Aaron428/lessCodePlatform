@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import Input from '@shared/input'
 import { TOOL_CONFIG } from '@shared/constants'
 import { changeCtxHandler, EditorContext } from '@store/index'
 import './index.css'
@@ -8,7 +7,7 @@ const ComponentBar = () => {
   const ctx = useContext(EditorContext)
 
   /**
-   * add component
+   * 记录拖拽的偏移量和组件类型，为添加做准备
    * @param _ drag event
    * @param type component type
    */
