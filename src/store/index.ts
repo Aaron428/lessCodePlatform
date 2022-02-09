@@ -2,7 +2,9 @@ import { createContext } from 'react'
 
 export const operateState: StoreType.IOperateState = {
   operate: undefined,
-  operateType: undefined
+  operateType: undefined,
+  shiftX: 0,
+  shiftY: 0
 }
 
 export const EditorContext = createContext(operateState)

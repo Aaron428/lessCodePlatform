@@ -14,8 +14,8 @@ const ComponentBar = () => {
    */
   const onStart = (e: React.DragEvent<HTMLDivElement>, type: SharedType.IToolTypes) => {
     const targetDom = e.target as HTMLElement
-    const shiftX = e.clientX - targetDom.getBoundingClientRect().left
-    const shiftY = e.clientY - targetDom.getBoundingClientRect().top
+    const shiftX = e.clientX - targetDom.getBoundingClientRect().left + 320
+    const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 100
     changeCtxHandler(ctx, { operate: 'ADD', operateType: type, shiftX, shiftY })
   }
 

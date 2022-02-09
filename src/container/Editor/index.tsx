@@ -17,8 +17,8 @@ const Editotr = () => {
       {
         ...INIT_IMAGE_CONFIG,
         id: generateId(),
-        x: e.pageX - 320 - (ctx.shiftX || 0),
-        y: e.pageY - 100 - (ctx.shiftY || 0),
+        x: e.pageX - ctx.shiftX,
+        y: e.pageY - ctx.shiftY,
         type: ctx.operateType
       }
     ])
@@ -28,8 +28,8 @@ const Editotr = () => {
     if (id) {
       const target = comp.find(d => d.id === id)
       if (target) {
-        target.x = e.pageX - 320 - (ctx.shiftX || 0)
-        target.y = e.pageY - 100 - (ctx.shiftY || 0)
+        target.x = e.pageX - ctx.shiftX
+        target.y = e.pageY - ctx.shiftY
         setComp([...comp])
       }
     }
@@ -49,8 +49,8 @@ const Editotr = () => {
   const activeCurrentComp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: string) => {
     if (ctx.setCtxObj) {
       const targetDom = e.target as HTMLElement
-      const shiftX = e.clientX - targetDom.getBoundingClientRect().left
-      const shiftY = e.clientY - targetDom.getBoundingClientRect().top
+      const shiftX = e.clientX - targetDom.getBoundingClientRect().left + 320
+      const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 100
       ctx.setCtxObj({ operate: 'MOVE', operateType: 'image', id, shiftX, shiftY })
     }
     setActiveComp(id)
