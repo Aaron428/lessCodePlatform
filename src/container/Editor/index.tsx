@@ -7,7 +7,6 @@ import './index.css'
 // 编辑器模块（中间的那一块）
 // 负责组建的新增、移动等操作
 const Editotr = () => {
-  const [activeComp, setActiveComp] = useState<string | null>(null)
   const [comp, setComp] = useState<EditorType.IComp[]>([])
 
   const ctx = useContext(EditorContext)
@@ -27,9 +26,9 @@ const Editotr = () => {
   }
 
   // move component
-  const moveComponentHandler = (e: React.DragEvent<HTMLDivElement>, id: string | null) => {
-    if (id) {
-      const target = comp.find(d => d.id === id)
+  const moveComponentHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    if (ctx.id) {
+      const target = comp.find(d => d.id === ctx.id)
       if (target) {
         const componentBarDom = document.querySelector('.component-bar') as HTMLElement
         let x = e.pageX - ctx.shiftX + OFFSET_X - (componentBarDom?.offsetLeft || 0)
@@ -63,7 +62,7 @@ const Editotr = () => {
       case 'ADD':
         addComponentHandler(e)
       case 'MOVE':
-        moveComponentHandler(e, activeComp)
+        moveComponentHandler(e)
       default:
         return
     }
@@ -77,18 +76,17 @@ const Editotr = () => {
       const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 104
       ctx.setCtxObj({ operate: 'MOVE', operateType: 'image', id, shiftX, shiftY })
     }
-    setActiveComp(id)
   }
 
   return (
     <div className="editor" onDrop={handleDrop} onDragOver={e => e.preventDefault()}>
       {comp.map(d => (
         <div
-          className={activeComp === d.id ? 'actived-component' : 'component'}
+          draggable
           key={d.id}
           style={dataToStyle(d)}
-          draggable
           onMouseDown={e => activeCurrentComp(e, d.id)}
+          className={ctx.id === d.id ? 'actived-component' : 'component'}
         ></div>
       ))}
     </div>

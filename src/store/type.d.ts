@@ -2,12 +2,12 @@ declare namespace StoreType {
   interface IOperateStateObj {
     operate: 'ADD' | 'DELETE' | 'MOVE' | 'MODIFY' | undefined
     operateType: SharedType.IToolTypes
-    id?: string
+    id: string
     shiftX: number
     shiftY: number
   }
 
   interface IOperateState extends IOperateStateObj {
-    setCtxObj?: (data: IOperateStateObj) => void
+    setCtxObj?: (data: Partial<IOperateStateObj>) => void
   }
 }
