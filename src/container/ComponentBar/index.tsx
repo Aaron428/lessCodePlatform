@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { TOOL_CONFIG } from '@shared/constants'
+import { OFFSET_TOOL_BAR, OFFSET_TOP_BAR, TOOL_CONFIG } from '@shared/constants'
 import { changeCtxHandler, EditorContext } from '@store/index'
 import './index.css'
 
@@ -12,9 +12,8 @@ const ComponentBar = () => {
    * @param type component type
    */
   const onStart = (e: React.DragEvent<HTMLDivElement>, type: SharedType.IToolTypes) => {
-    const targetDom = e.target as HTMLElement
-    const shiftX = e.clientX - targetDom.getBoundingClientRect().left + 340
-    const shiftY = e.clientY - targetDom.getBoundingClientRect().top + 104
+    const shiftX = e.clientX + OFFSET_TOOL_BAR
+    const shiftY = e.clientY - OFFSET_TOP_BAR
     changeCtxHandler(ctx, { operate: 'ADD', operateType: type, shiftX, shiftY })
   }
 

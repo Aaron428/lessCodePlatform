@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { dataToStyle, generateId } from '@utils/index'
-import { INIT_IMAGE_CONFIG } from '@shared/constants'
+import { INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
 import { EditorContext } from '@store/index'
 import './index.css'
 
@@ -31,7 +31,8 @@ const Editotr = () => {
     if (id) {
       const target = comp.find(d => d.id === id)
       if (target) {
-        let x = e.pageX - ctx.shiftX
+        const componentBarDom = document.querySelector('.component-bar') as HTMLElement
+        let x = e.pageX - ctx.shiftX + OFFSET_X - (componentBarDom?.offsetLeft || 0)
         let y = e.pageY - ctx.shiftY
         const maxX = document.querySelector('.editor')?.clientWidth
         const maxY = document.querySelector('.editor')?.clientHeight

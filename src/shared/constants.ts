@@ -27,3 +27,9 @@ export const INIT_IMAGE_CONFIG = {
   width: 100,
   height: 100
 }
+
+export const OFFSET_X = 100 - 24
+
+export const OFFSET_TOOL_BAR = 200 + 24
+
+export const OFFSET_TOP_BAR = 100
