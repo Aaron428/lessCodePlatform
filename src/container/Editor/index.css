@@ -17,6 +17,6 @@
 }
 
 .editor .actived-component {
-  border: 1px solid deepskyblue;
+  border: 1px solid #40a9ff;
   cursor: move;
 }

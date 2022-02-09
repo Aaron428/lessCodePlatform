@@ -1,0 +1,60 @@
+.controler-resize {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #40a9ff;
+}
+
+.controler-resize[data-direction="lt"] {
+  left: -4px;
+  top: -4px;
+  cursor: nwse-resize;
+}
+
+.controler-resize[data-direction^="c"] {
+  top: -4px;
+  left: calc(50% - 4px);
+  cursor: ns-resize;
+}
+
+.controler-resize[data-direction^="r"] {
+  top: -4px;
+  left: calc(100% - 4px);
+  cursor: nesw-resize;
+}
+
+.controler-resize[data-direction="lc"] {
+  top: calc(50% - 4px);
+  left: -4px;
+  cursor: nesw-resize;
+}
+
+.controler-resize[data-direction="lc"] {
+  top: calc(50% - 4px);
+  left: -4px;
+  cursor: ew-resize;
+}
+
+.controler-resize[data-direction="rc"] {
+  left: calc(100% - 4px);
+  top: calc(50% - 4px);
+  cursor: ew-resize;
+}
+
+.controler-resize[data-direction="lb"] {
+  top: calc(100% - 4px);
+  left: -4px;
+  cursor: nesw-resize;
+}
+
+.controler-resize[data-direction="cb"] {
+  left: calc(50% - 4px);
+  top: calc(100% - 4px);
+  cursor: ns-resize;
+}
+
+.controler-resize[data-direction="rb"] {
+  left: calc(100% - 4px);
+  top: calc(100% - 4px);
+  cursor: nwse-resize;
+}

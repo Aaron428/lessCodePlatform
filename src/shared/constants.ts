@@ -33,3 +33,5 @@ export const OFFSET_X = 100 - 24
 export const OFFSET_TOOL_BAR = 200 + 24
 
 export const OFFSET_TOP_BAR = 100
+
+export const directList: string[] = ['lt', 'ct', 'rt', 'lc', 'rc', 'lb', 'cb', 'rb']

@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { dataToStyle, generateId } from '@utils/index'
-import { INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
+import { directList, INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
 import { EditorContext } from '@store/index'
 import './index.css'
+import ActiveComponent from '@shared/activeComponent'
 
 // 编辑器模块（中间的那一块）
 // 负责组建的新增、移动等操作
@@ -13,16 +14,15 @@ const Editotr = () => {
 
   // add component
   const addComponentHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    setComp([
-      ...comp,
-      {
-        ...INIT_IMAGE_CONFIG,
-        id: generateId(),
-        x: e.pageX - ctx.shiftX,
-        y: e.pageY - ctx.shiftY,
-        type: ctx.operateType
-      }
-    ])
+    const newData = [...comp]
+    newData.push({
+      ...INIT_IMAGE_CONFIG,
+      id: generateId(),
+      x: e.pageX - ctx.shiftX,
+      y: e.pageY - ctx.shiftY,
+      type: ctx.operateType
+    })
+    setComp(newData)
   }
 
   // move component
@@ -87,7 +87,9 @@ const Editotr = () => {
           style={dataToStyle(d)}
           onMouseDown={e => activeCurrentComp(e, d.id)}
           className={ctx.id === d.id ? 'actived-component' : 'component'}
-        ></div>
+        >
+          {ctx.id === d.id && <ActiveComponent />}
+        </div>
       ))}
     </div>
   )
