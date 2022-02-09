@@ -33,7 +33,15 @@ const Editotr = () => {
       if (target) {
         let x = e.pageX - ctx.shiftX
         let y = e.pageY - ctx.shiftY
+        const maxX = document.querySelector('.editor')?.clientWidth
+        const maxY = document.querySelector('.editor')?.clientHeight
         // 规定边界
+        if (typeof maxX === 'number' && x > maxX - target.width) {
+          x = maxX - target.width
+        }
+        if (typeof maxY === 'number' && y > maxY - target.height) {
+          y = maxY - target.height
+        }
         if (x < 0) {
           x = 0
         }
