@@ -4,9 +4,10 @@ import './index.css'
 
 const points = ['e', 'w', 's', 'n', 'ne', 'nw', 'se', 'sw']
 
+let isDown = false
+let currentDirectioin = ''
+
 const EditableBox = () => {
-  const isDown = useRef(false)
-  const direction = useRef('')
   // 初始数据， 因为不需要重新render 所以用 useRef
   const oriPos = useRef({
     top: 0, // 元素的坐标
@@ -32,11 +33,12 @@ const EditableBox = () => {
   // 鼠标被按下
   const onMouseDown = useCallback(
     (dir, e) => {
+      console.log(dir)
       // 阻止事件冒泡
       e.stopPropagation()
       // 保存方向。
-      direction.current = dir
-      isDown.current = true
+      currentDirectioin = dir
+      isDown = true
       // 然后鼠标坐标是
       const cY = e.clientY // clientX 相对于可视化区域
       const cX = e.clientX
@@ -63,7 +65,7 @@ const EditableBox = () => {
 
       const offsetX = e.clientX - oriPos.current.cX
       const offsetY = e.clientY - oriPos.current.cY
-      switch (direction.current) {
+      switch (direction) {
         // 拖拽移动
         case 'move':
           // 元素当前位置 + 偏移量
@@ -129,15 +131,15 @@ const EditableBox = () => {
   const onMouseMove = useCallback(
     (e: any) => {
       // 判断鼠标是否按住
-      if (!isDown.current) return
-      transform(direction, oriPos, e)
+      if (!isDown) return
+      transform(currentDirectioin, oriPos, e)
     },
     [style]
   )
 
   // 鼠标被抬起
   const onMouseUp = useCallback(() => {
-    isDown.current = false
+    isDown = false
     const cubeDom = document.getElementById('cube')
     if (cubeDom) {
       const left = removePxAndConverseToNumber(cubeDom.style.left)
