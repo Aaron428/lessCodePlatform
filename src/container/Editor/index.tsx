@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { dataToStyle, generateId } from '@utils/index'
+import { generateId } from '@utils/index'
 import { INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
 import { changeCtxHandler, EditorContext } from '@store/index'
 import EditableBox from '@shared/editableBox'
@@ -78,14 +78,6 @@ const Editotr = () => {
     <div className="editor" onDrop={handleDrop} onDragOver={e => e.preventDefault()}>
       {ctx.comps.map(d => (
         <EditableBox key={d.id} />
-        // <div
-        //
-        //   style={dataToStyle(d)}
-        //   onMouseDown={e => activeCurrentComp(e, d.id)}
-        //   className={ctx.id === d.id ? 'actived-component' : 'component'}
-        // >
-        //   {ctx.id === d.id && }
-        // </div>
       ))}
     </div>
   )

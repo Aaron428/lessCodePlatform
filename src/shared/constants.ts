@@ -34,4 +34,14 @@ export const OFFSET_TOOL_BAR = 200 + 24
 
 export const OFFSET_TOP_BAR = 100
 
-export const directList: string[] = ['lt', 'ct', 'rt', 'lc', 'rc', 'lb', 'cb', 'rb']
+export const DIRECTION_MAP = {
+  上: 'n',
+  下: 's',
+  左: 'w',
+  右: 'e',
+  上左: 'nw',
+  上右: 'ne',
+  下左: 'sw',
+  下右: 'se',
+  移动: 'move'
+}

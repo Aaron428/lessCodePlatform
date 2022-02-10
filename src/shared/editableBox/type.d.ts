@@ -1,14 +1,5 @@
 declare namespace EditableBoxType {
-  type DireactionType =
-    | 'right'
-    | 'left'
-    | 'bottom'
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'move'
+  type DireactionType = 'e' | 'w' | 's' | 'n' | 'ne' | 'nw' | 'se' | 'sw' | 'move'
 
   interface IBasicStyle {
     top: number
@@ -20,7 +11,7 @@ declare namespace EditableBoxType {
   interface IMousePos {
     top: number
     left: number
-    mouseX: number
-    mouseY: number
+    cX: number
+    cY: number
   }
 }
