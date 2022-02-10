@@ -31,3 +31,5 @@ export const dataToStyle = (data: EditorType.IComp): React.CSSProperties => ({
   width: data.width,
   height: data.height
 })
+
+export const removePxAndConverseToNumber = (attr: string): number => Number(attr.replace('px', ''))

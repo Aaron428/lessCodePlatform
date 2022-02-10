@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { dataToStyle, generateId } from '@utils/index'
 import { INIT_IMAGE_CONFIG, OFFSET_X } from '@shared/constants'
 import { changeCtxHandler, EditorContext } from '@store/index'
+import EditableBox from '@shared/editableBox'
 import './index.css'
-import ActiveComponent from '@shared/activeComponent'
 
 // 编辑器模块（中间的那一块）
 // 负责组建的新增、移动等操作
@@ -77,15 +77,15 @@ const Editotr = () => {
   return (
     <div className="editor" onDrop={handleDrop} onDragOver={e => e.preventDefault()}>
       {ctx.comps.map(d => (
-        <div
-          // draggable
-          key={d.id}
-          style={dataToStyle(d)}
-          onMouseDown={e => activeCurrentComp(e, d.id)}
-          className={ctx.id === d.id ? 'actived-component' : 'component'}
-        >
-          {ctx.id === d.id && <ActiveComponent />}
-        </div>
+        <EditableBox key={d.id} />
+        // <div
+        //
+        //   style={dataToStyle(d)}
+        //   onMouseDown={e => activeCurrentComp(e, d.id)}
+        //   className={ctx.id === d.id ? 'actived-component' : 'component'}
+        // >
+        //   {ctx.id === d.id && }
+        // </div>
       ))}
     </div>
   )
