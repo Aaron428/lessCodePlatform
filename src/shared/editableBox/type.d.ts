@@ -1,5 +1,5 @@
 declare namespace EditableBoxType {
-  type DireactionType = 'e' | 'w' | 's' | 'n' | 'ne' | 'nw' | 'se' | 'sw' | 'move'
+  type DireactionType = 'e' | 'w' | 's' | 'n' | 'ne' | 'nw' | 'se' | 'sw' | 'move' | ''
 
   interface IBasicStyle {
     top: number

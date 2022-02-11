@@ -1,12 +1,12 @@
 import { DIRECTION_MAP } from '@shared/constants'
 import { removePxAndConverseToNumber } from '@utils/index'
-import { useRef, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import './index.css'
 
 const points: EditableBoxType.DireactionType[] = ['e', 'w', 's', 'n', 'ne', 'nw', 'se', 'sw']
 
 let isDown = false
-let currentDirectioin: EditableBoxType.DireactionType = 'move'
+let currentDirectioin: EditableBoxType.DireactionType = ''
 let oriPos: EditableBoxType.IMousePos = { top: 0, left: 0, cX: 0, cY: 0 }
 
 const EditableBox = () => {
@@ -25,24 +25,25 @@ const EditableBox = () => {
   })
 
   // 鼠标被按下
-  const onMouseDown = useCallback(
-    (dir, e) => {
-      // 阻止事件冒泡
-      e.stopPropagation()
-      // 保存方向。
-      currentDirectioin = dir
-      isDown = true
-      // 然后鼠标坐标是
-      const cY = e.clientY // clientX 相对于可视化区域
-      const cX = e.clientX
-      oriPos = {
-        ...style,
-        cX,
-        cY
-      }
-    },
-    [style]
-  )
+  const onMouseDown = (
+    dir: EditableBoxType.DireactionType,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    // 阻止事件冒泡
+    e.stopPropagation()
+    // 保存方向。
+    currentDirectioin = dir
+    isDown = true
+    // 然后鼠标坐标是
+    const cY = e.clientY // clientX 相对于可视化区域
+    const cX = e.clientX
+    console.log(style)
+    oriPos = {
+      ...style,
+      cX,
+      cY
+    }
+  }
 
   /**
    * 元素变化。 方法放在组件外部或者其他地方。
@@ -125,17 +126,15 @@ const EditableBox = () => {
   }
 
   // 鼠标移动
-  const onMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      // 判断鼠标是否按住
-      if (!isDown) return
-      transform(currentDirectioin, oriPos, e)
-    },
-    [style]
-  )
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // 判断鼠标是否按住
+    console.log(currentDirectioin)
+    if (!isDown) return
+    transform(currentDirectioin, oriPos, e)
+  }
 
   // 鼠标被抬起
-  const onMouseUp = useCallback(() => {
+  const onMouseUp = () => {
     isDown = false
     const cubeDom = document.getElementById('cube')
     if (cubeDom) {
@@ -143,18 +142,25 @@ const EditableBox = () => {
       const top = removePxAndConverseToNumber(cubeDom.style.top)
       const width = removePxAndConverseToNumber(cubeDom.style.width)
       const height = removePxAndConverseToNumber(cubeDom.style.height)
-      setStyle({ left, top, width, height })
+      setTimeout(() => setStyle({ left, top, width, height }), 10)
     }
-  }, [style])
+    currentDirectioin = ''
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousemove', (e: any) => transform(currentDirectioin, oriPos, e))
+  }, [])
 
   return (
-    <div
-      className="drawing-wrap"
-      onMouseDown={e => onMouseDown('move', e)}
-      onMouseUp={onMouseUp}
-      onMouseMove={onMouseMove}
-    >
-      <div className="drawing-item" style={style} id="cube">
+    <div className="drawing-wrap">
+      <div
+        className="drawing-item"
+        style={style}
+        id="cube"
+        onMouseDown={e => onMouseDown('move', e)}
+        onMouseUp={onMouseUp}
+        onMouseMove={onMouseMove}
+      >
         {points.map(item => (
           <div
             key={item}
