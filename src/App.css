@@ -33,5 +33,6 @@
 
 #test {
   border: 1px solid #ccc;
+  cursor: move;
   position: relative;
 }

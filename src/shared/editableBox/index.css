@@ -20,68 +20,53 @@
   position: absolute;
   display: inline-block;
   box-sizing: border-box;
-  margin-top: -8px !important;
-  margin-left: -8px !important;
-  padding: 8px;
+  padding: 4px;
   border: 1px solid #c0c5cf;
-  border-radius: 6px;
   background: #fff;
   box-shadow: 0 0 2px 0 rgba(86, 90, 98, .2);
-
+  transform: translate(-4px, -4px);
   user-select: none;
 }
 
 .control-point.point-e {
   top: 50%;
   left: 100%;
-  margin-left: 1px;
   cursor: ew-resize;
 }
 
 .control-point.point-n {
   left: 50%;
-  margin-top: -1px;
   cursor: ns-resize;
 }
 
 .control-point.point-s {
   top: 100%;
   left: 50%;
-  margin-top: 1px;
   cursor: ns-resize;
 }
 
 .control-point.point-w {
   top: 50%;
   left: 0;
-  margin-left: -1px;
   cursor: ew-resize;
 }
 
 .control-point.point-ne {
   left: 100%;
-  margin-top: -1px;
-  margin-left: 1px;
   cursor: nesw-resize;
 }
 
 .control-point.point-nw {
-  margin-top: -1px;
-  margin-left: -1px;
   cursor: nwse-resize;
 }
 
 .control-point.point-se {
   top: 100%;
   left: 100%;
-  margin-top: 1px;
-  margin-left: 1px;
   cursor: nwse-resize;
 }
 
 .control-point.point-sw {
   top: 100%;
-  margin-top: 1px;
-  margin-left: -1px;
   cursor: nesw-resize;
 }
