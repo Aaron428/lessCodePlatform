@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { removePxAndConverseToNumber } from '@utils/index'
+import React, { useCallback, useState, useContext, useEffect } from 'react'
+import { dataToStyle, removePxAndConverseToNumber } from '@utils/index'
 import { DIRECTION_MAP } from '@shared/constants'
 import './index.css'
 import { EditorContext } from '@store/index'
@@ -15,13 +15,15 @@ let prevStyle = {
   height: 100
 }
 
-const TestComp = ({ editId }: EditableBoxType.IProps) => {
-  // const ctx = useContext(EditorContext)
+const EditableBox = () => {
+  const [activeId, setActiveId] = useState('')
+  const ctx = useContext(EditorContext)
 
   const handleMove = (e: MouseEvent) => {
     e.stopPropagation()
     if (isDown && operateDirectioin !== '') {
-      const dom = document.getElementById(editId)
+      console.log(activeId)
+      const dom = document.getElementById(activeId)
       if (dom) {
         const domStyle = { ...prevStyle }
         const offsetX = e.clientX - oriPos.x
@@ -86,7 +88,8 @@ const TestComp = ({ editId }: EditableBoxType.IProps) => {
 
   const handleDown = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    direction: EditableBoxType.DireactionType
+    direction: EditableBoxType.DireactionType,
+    id: string
   ) => {
     e.stopPropagation()
     operateDirectioin = direction
@@ -98,13 +101,14 @@ const TestComp = ({ editId }: EditableBoxType.IProps) => {
       x,
       y
     }
+    setActiveId(id)
   }
 
   const handleUp = (e: MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
     isDown = false
     operateDirectioin = ''
-    const dom = document.getElementById(editId)
+    const dom = document.getElementById(activeId)
     if (dom) {
       const left = removePxAndConverseToNumber(dom.style.left)
       const top = removePxAndConverseToNumber(dom.style.top)
@@ -112,13 +116,12 @@ const TestComp = ({ editId }: EditableBoxType.IProps) => {
       const height = removePxAndConverseToNumber(dom.style.height)
       prevStyle = { height, width, left, top }
     }
-    console.log(prevStyle)
   }
 
   useEffect(() => {
     document.addEventListener('mousemove', e => handleMove(e))
     return document.removeEventListener('mousemove', handleMove)
-  }, [])
+  }, [activeId])
 
   useEffect(() => {
     document.addEventListener('mouseup', e => handleUp(e))
@@ -126,23 +129,29 @@ const TestComp = ({ editId }: EditableBoxType.IProps) => {
   }, [])
 
   return (
-    <div
-      id={editId}
-      className="edit-box"
-      style={prevStyle}
-      onMouseDown={e => handleDown(e, 'move')}
-      onMouseUp={e => handleUp(e)}
-    >
-      {points.map(item => (
+    <>
+      {ctx.comps.map(comp => (
         <div
-          key={item}
-          className={`control-point point-${item}`}
-          onMouseDown={e => handleDown(e, item)}
+          key={comp.id}
+          id={comp.id}
+          className="edit-box"
+          style={dataToStyle(comp)}
+          onMouseDown={e => handleDown(e, 'move', comp.id)}
           onMouseUp={e => handleUp(e)}
-        ></div>
+        >
+          {comp.id === activeId &&
+            points.map(item => (
+              <div
+                key={item}
+                className={`control-point point-${item}`}
+                onMouseDown={e => handleDown(e, item, comp.id)}
+                onMouseUp={e => handleUp(e)}
+              ></div>
+            ))}
+        </div>
       ))}
-    </div>
+    </>
   )
 }
 
-export default TestComp
+export default EditableBox

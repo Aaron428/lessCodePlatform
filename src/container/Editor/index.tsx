@@ -76,9 +76,7 @@ const Editotr = () => {
 
   return (
     <div className="editor" onDrop={handleDrop} onDragOver={e => e.preventDefault()}>
-      {ctx.comps.map(d => (
-        <EditableBox key={d.id} editId={d.id} />
-      ))}
+      <EditableBox />
     </div>
   )
 }
