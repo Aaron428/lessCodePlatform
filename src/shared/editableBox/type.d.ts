@@ -14,4 +14,8 @@ declare namespace EditableBoxType {
     cX: number
     cY: number
   }
+
+  interface IProps {
+    editId: string
+  }
 }

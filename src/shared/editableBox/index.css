@@ -70,3 +70,10 @@
   top: 100%;
   cursor: nesw-resize;
 }
+
+
+.edit-box {
+  border: 1px solid #ccc;
+  cursor: move;
+  position: absolute;
+}

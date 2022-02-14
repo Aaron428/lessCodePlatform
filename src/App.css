@@ -30,9 +30,3 @@
 .editor-menu label {
   margin-right: 8px;
 }
-
-#test {
-  border: 1px solid #ccc;
-  cursor: move;
-  position: relative;
-}
