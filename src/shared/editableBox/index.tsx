@@ -22,7 +22,6 @@ const EditableBox = () => {
   const handleMove = (e: MouseEvent) => {
     e.stopPropagation()
     if (isDown && operateDirectioin !== '') {
-      console.log(activeId)
       const dom = document.getElementById(activeId)
       if (dom) {
         const domStyle = { ...prevStyle }
@@ -139,6 +138,7 @@ const EditableBox = () => {
           onMouseDown={e => handleDown(e, 'move', comp.id)}
           onMouseUp={e => handleUp(e)}
         >
+          hello world
           {comp.id === activeId &&
             points.map(item => (
               <div

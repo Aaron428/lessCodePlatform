@@ -57,6 +57,7 @@
 }
 
 .control-point.point-nw {
+  left: 0;
   cursor: nwse-resize;
 }
 
@@ -68,6 +69,7 @@
 
 .control-point.point-sw {
   top: 100%;
+  left: 0;
   cursor: nesw-resize;
 }
 
